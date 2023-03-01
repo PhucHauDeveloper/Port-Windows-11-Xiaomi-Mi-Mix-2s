@@ -1,26 +1,25 @@
-<img align="right" src="https://github.com/wormstest/src_vayu_windows/blob/main/2Poco X3 Pro Windows.png" width="350" alt="Windows 11 Running On A Poco X3 Pro">
+<img align="right" src="https://github.com/PhucHauDeveloper/Port-Windows-11-Xiaomi-Mi-Mix-2s/blob/b71fde07677d753897aa44eaec1914f54c57cede/guide/png/Xiaomi%20Mi%20Mix%202s%20Windows.png?raw=true" width="350" alt="Windows 11 Running On A Xiaomi Mi Mix 2s">
 
 
-# Running Windows on the POCO X3 Pro
+# Running Windows on the Xiaomi Mi Mix 2s
 
 ## Installation
 
 ## Installing Windows
-> You will need to have MTP disabled in Mount
 
 ### Prerequisites
 
-- [Windows on ARM image (Windows 11 is recommended)](https://uupdump.net/)
-- [UEFI image](https://github.com/degdag/edk2-msm/releases/latest)
-- [DriverUpdater](https://github.com/WOA-Project/DriverUpdater/releases/latest)
-- [Drivers](https://github.com/degdag/Vayu-Drivers/releases/latest)
-
-#### Execute the msc script
+- Only releases, I put everything you need in it!
+### Flash the uefi image from TWRP/or 
+> If you already have TWRP/any else custom recovery installed, just hold the power and vol+ buttons at startup
 
 ```cmd
-adb shell msc.sh
+fastboot flash boot uefi.img
 ```
 
+#### Enter Simple Init
+> Reboot phone,
+> ##############################################
   
 
 ### Assign letters to disks
