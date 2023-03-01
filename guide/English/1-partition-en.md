@@ -18,6 +18,7 @@
 - Ignore `udevadm` warnings
 - Do not run the same command twice
 - On recovery and uefi, screen not working.
+- I highly recommend using a good connection cable or at least it's stable otherwise you'll need to read the device recovery guide
 - DO NOT REBOOT YOUR PHONE if you think you made a mistake, ask for help in the [Facebook](https://www.facebook.com/ThaiHoangPhucHau/)
 
 #### ⚠️ Do not run all commands at once, execute them in order!
