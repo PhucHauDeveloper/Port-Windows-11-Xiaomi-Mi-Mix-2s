@@ -101,41 +101,44 @@ mkpart userdata ext4 40GB 59.1GB
 <summary><b><strong>Dành cho máy 128GB</strong></b></summary>
 
 
-- Tạo phân vùng dữ liệu của Android
+  - Tạo phân vùng ESP (lưu trữ bộ tải khởi động Windows và tệp EFI)
 ```sh
-mkpart userdata ext4 11.8GB 68.6GB
+mkpart esp fat32 6559MB 7000MB
 ```
 
 - Tạo phân vùng chính nơi Windows sẽ được cài đặt
 ```sh
-mkpart win ntfs 68.6GB 126GB
+mkpart win ntfs 7000MB 100GB
+```
+  
+- Tạo phân vùng dữ liệu của Android
+```sh
+mkpart userdata ext4 100GB 123GB
 ```
 
-- Tạo phân vùng ESP (lưu trữ bộ tải khởi động Windows và tệp EFI)
-```sh
-mkpart esp fat32 126GB 127GB 
-```
   </summary>
 </details>
+
 
 <details>
 <summary><b><strong>Dành cho máy 256GB</strong></b></summary>
 
-
-- Tạo phân vùng dữ liệu của Android
+  
+  - Tạo phân vùng ESP (lưu trữ bộ tải khởi động Windows và tệp EFI)
 ```sh
-mkpart userdata ext4 11.8GB 134.6GB
+mkpart esp fat32 6559MB 7000MB
 ```
 
 - Tạo phân vùng chính nơi Windows sẽ được cài đặt
 ```sh
-mkpart win ntfs 134.6GB 254GB
+mkpart win ntfs 7000MB 220GB
+```
+  
+- Tạo phân vùng dữ liệu của Android
+```sh
+mkpart userdata ext4 220GB 251GB
 ```
 
-- Tạo phân vùng ESP (lưu trữ bộ tải khởi động Windows và tệp EFI)
-```sh
-mkpart esp fat32 254GB 255GB
-```
   </summary>
 </details>
 
