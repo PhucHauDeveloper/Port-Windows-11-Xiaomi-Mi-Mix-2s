@@ -1,29 +1,31 @@
 <img align="right" src="https://github.com/PhucHauDeveloper/Port-Windows-11-Xiaomi-Mi-Mix-2s/blob/b71fde07677d753897aa44eaec1914f54c57cede/guide/png/Xiaomi%20Mi%20Mix%202s%20Windows.png?raw=true" width="350" alt="Windows 11 Running On A Xiaomi Mi Mix 2s">
 
 
-# Running Windows on the Xiaomi Mi Mix 2s
+# Chạy Windows trên điện thoại Xiaomi Mi Mix 2s
 
-## Installation
+## Hướng dẫn cài đặt
 
-## Partitioning your device
+## Phân vùng lại điện thoại
 
-### Prerequisites
+### Yêu cầu bắt buộc
 
-- Only releases, I put everything you need in it!
+- Tải phiên bản mới nhất, trong đó có mọi thứ từ a đến z trong việc cài!
 
 ### Notes:
-> **Warning** if you delete any partitions via diskpart later on or now windows will send a ufs command that gets misinterpreted which erase all your ufs
-- All your data will be erased! Backup now if needed.
-- These commands have been tested.
-- Ignore `udevadm` warnings
-- Do not run the same command twice
-- DO NOT REBOOT YOUR PHONE if you think you made a mistake, ask for help in the [Facebook](https://www.facebook.com/ThaiHoangPhucHau/)
+> **Warning** nếu bạn xóa bất kỳ phân vùng nào qua diskpart lác nữa hoặc bây giờ, windows sẽ gửi lệnh ufs lỗi và xóa tất cả ufs của bạn
+- Tất cả dữ liệu của bạn sẽ bị xóa! Sao lưu ngay nếu cần.
+- Các lệnh này đã được thử nghiệm.
+- Bỏ qua cảnh báo `udevadm` nếu có
+- Không tắm một dòng sông 2 lần cũng như chạy cùng một lệnh hai lần
+- KHÔNG KHỞI ĐỘNG LẠI ĐIỆN THOẠI nếu bạn cho rằng mình đã toan, hãy yêu cầu trợ giúp từ tôi [Facebook Hậu](fb.com/ThaiHoangPhucHau/) hoặc [kmille36](https://github.com/kmille36)
 
-#### ⚠️ Do not run all commands at once, execute them in order!
+####  Hãy chắc rằng bạn đã unlock bloatware, nếu không bạn không thể làm được
 
-##### ⚠️ DO NOT MAKE ANY MISTAKE!!! YOU CAN BREAK YOUR DEVICE WITH THE COMMANDS BELOW IF YOU DO THEM WRONG!!!
+#### ⚠️ Chậm mà chắc, đừng chạy tất cả các lệnh cùng một lúc, hãy thực hiện chúng theo thứ tự!
 
-#### First hold shift + right click on the folder, select "Open in Terminal" if you don't want flashboot error
+##### ⚠️ ĐỪNG MẮC SAI LẦM!!! BẠN CÓ THỂ KHIẾN CỦA MÌNH TOAN BẰNG CÁC LỆNH BÊN DƯỚI NẾU LÀM SAI!!!
+
+#### Đầu tiên giữ shift + click chuột phải vào thư mục, chọn "Open in Terminal" nếu không muốn lỗi trong flashboot
 
 ```cmd
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\usbflags\18D1D00D0100" /v "osvc" /t REG_BINARY /d "0000" /f
