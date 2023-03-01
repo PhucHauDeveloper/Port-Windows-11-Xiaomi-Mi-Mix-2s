@@ -17,6 +17,7 @@
 - These commands have been tested.
 - Ignore `udevadm` warnings
 - Do not run the same command twice
+- On recovery and uefi, screen not working.
 - DO NOT REBOOT YOUR PHONE if you think you made a mistake, ask for help in the [Facebook](https://www.facebook.com/ThaiHoangPhucHau/)
 
 #### ⚠️ Do not run all commands at once, execute them in order!
@@ -35,7 +36,7 @@ reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\usbflags\18D1D00D01
 ```cmd
 fastboot boot <twrp.img>
 ```
-
+> If you already have TWRP/any else custom recovery installed, just hold the power and vol+ buttons at startup
 #### Unmount all partitions
 Go to TWRP settings and unmount all partitions
 
