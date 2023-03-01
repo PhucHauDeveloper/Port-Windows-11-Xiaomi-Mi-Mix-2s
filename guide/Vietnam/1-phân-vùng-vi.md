@@ -33,58 +33,62 @@ reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\usbflags\18D1D00D01
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\usbflags\18D1D00D0100" /v "SkipBOSDescriptorQuery" /t REG_BINARY /d "01000000" /f
 ```
 
-##### Boot TWRP recovery through the PC with the command
+##### Khởi động phục hồi TWRP thông qua PC bằng lệnh
 ```cmd
 fastboot boot <twrp.img>
 ```
 
-#### Unmount all partitions
-Go to TWRP settings and unmount all partitions
+#### Ngắt kết nối tất cả các phân vùng
+Chuyển đến cài đặt TWRP và ngắt kết nối tất cả các phân vùng
 
-#### Start ADB shell
+#### Bắt đầu lệnh ADB
 ```cmd
 adb shell
 ```
 
-#### Resize the partition table
-> So that the Windows partitions can fit
+#### Thay đổi kích thước cây phân vùng
+> Chuyển parted sang thư mục sbin
 ```sh
-sgdisk --resize-table 64 /dev/block/sda
+cp /sdcard/parted /sbin/ && chmod 755 /sbin/parted
 ```
 
-#### Start parted
+> Ngắt kết nối data và sdcard
+```sh
+umount /data && umount /sdcard
+```
+#### Chạy parted
 ```sh
 parted /dev/block/sda
 ```
 
 
-#### Delete the `userdata` partition
-> You can make sure that 32 is the userdata partition number by running
+#### Xóa phân vùng `userdata`
+> Bạn có thể đảm bảo rằng 21 là số phân vùng userdata bằng cách chạy
 >  `print all`
 ```sh
 rm 21
 ```
 
-#### Create partitions
-> If you get any warning message telling you to ignore or cancel, just type i and enter
+#### Tạo phân vùng
+> Nếu bạn nhận được bất kỳ thông báo cảnh báo nào yêu cầu bạn bỏ qua hoặc hủy, chỉ cần nhập i và nhấn enter
 
 
 
 <details>
-<summary><b><strong>For 64GB Models</strong></b></summary>
+<summary><b><strong>Dành cho máy 64GB</strong></b></summary>
 
   
-  - Create the ESP partition (stores Windows bootloader data and EFI files)
+  - Tạo phân vùng ESP (lưu trữ bộ tải khởi động Windows và tệp EFI)
 ```sh
 mkpart esp fat32 6559MB 7000MB
 ```
 
-- Create the main partition where Windows will be installed to
+- Tạo phân vùng chính nơi Windows sẽ được cài đặt
 ```sh
 mkpart win ntfs 7000MB 40GB
 ```
   
-- Create Android's data partition
+- Tạo phân vùng dữ liệu của Android
 ```sh
 mkpart userdata ext4 40GB 59.1GB
 ```
@@ -94,20 +98,20 @@ mkpart userdata ext4 40GB 59.1GB
 
 
 <details>
-<summary><b><strong>For 128GB Models</strong></b></summary>
+<summary><b><strong>Dành cho máy 128GB</strong></b></summary>
 
 
-- Create Android's data partition
+- Tạo phân vùng dữ liệu của Android
 ```sh
 mkpart userdata ext4 11.8GB 68.6GB
 ```
 
-- Create the main partition where Windows will be installed to
+- Tạo phân vùng chính nơi Windows sẽ được cài đặt
 ```sh
 mkpart win ntfs 68.6GB 126GB
 ```
 
-- Create the ESP partition (stores Windows bootloader data and EFI files)
+- Tạo phân vùng ESP (lưu trữ bộ tải khởi động Windows và tệp EFI)
 ```sh
 mkpart esp fat32 126GB 127GB 
 ```
@@ -115,63 +119,62 @@ mkpart esp fat32 126GB 127GB
 </details>
 
 <details>
-<summary><b><strong>For 256GB Models</strong></b></summary>
+<summary><b><strong>Dành cho máy 256GB</strong></b></summary>
 
 
-- Create Android's data partition
+- Tạo phân vùng dữ liệu của Android
 ```sh
 mkpart userdata ext4 11.8GB 134.6GB
 ```
 
-- Create the main partition where Windows will be installed to
+- Tạo phân vùng chính nơi Windows sẽ được cài đặt
 ```sh
 mkpart win ntfs 134.6GB 254GB
 ```
 
-- Create the ESP partition (stores Windows bootloader data and EFI files)
+- Tạo phân vùng ESP (lưu trữ bộ tải khởi động Windows và tệp EFI)
 ```sh
 mkpart esp fat32 254GB 255GB
 ```
   </summary>
 </details>
 
-#### Make ESP partiton bootable so the EFI image can detect it
+#### Tạo phân vùng khởi động ESP để EFI có thể phát hiện ra nó
 ```sh
 set 21 esp on
 ```
 
-#### Quit parted
+#### Thoát parted
 ```sh
 quit
 ```
 
-#### Reboot to TWRP
+#### Khởi động vào TWRP
 
-#### Start the shell again on your PC
+#### Khởi động lại ADB trên PC của bạn
 ```cmd
 adb shell
 ```
 
-#### Format partitions
--  Format the ESP partiton as FAT32
+#### Định dạng phân vùng
+-  Định dạng phân vùng
 ```sh
 mkfs.fat -F32 -s1 /dev/block/by-name/esp
 ```
 
--  Format the Windows partition as NTFS
+-  Định dạng phân vùng Windows thành NTFS
 ```sh
 mkfs.ntfs -f /dev/block/by-name/win
 ```
 
-- Format data
+- Định dạng phân vùng userdata
 ```sh
-mkfs.ntfs -f /dev/block/by-name/win
+mke2fs -t ext4 /dev/block/by-name/userdata
 ```
-Or go to Wipe menu(twrp) and press Format Data, 
-then type `yes`.
+Hoặc vào menu Wipe(twrp) và nhấn Format Data, sau đó nhấn `yes`.
 
-#### Check if Android still starts
-Just restart the phone, and see if Android still works
+#### Kiểm tra xem Android có còn khởi động không
+Chỉ cần khởi động lại điện thoại và xem Android có còn hoạt động không, không thì bạn toan rồi đấy :))
 
 
-## [Next step: Installing Windows](/guide/English/2-install-en.md)
+## [Bước tiếp theo: Cài đặt Windows](/guide/English/2-install-en.md)
