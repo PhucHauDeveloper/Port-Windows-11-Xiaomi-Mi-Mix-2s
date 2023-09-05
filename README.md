@@ -14,20 +14,20 @@ This project is in an early stage, all the files here have been contributed by o
 
 ## Get Started
 
-- [Installation instructions](guide/install-selection.md)
+- [Installation instructions](guide/Vietnam/install-selection.md)
 
-- [Uninstall instructions](guide/uninstall-selection.md)
+- [Uninstall instructions](guide/Vietnam/uninstall-selection.md)
 
 
 ## Miscellaneous
 
-- [Dualboot Setup](guide/dualboot-selection.md)
+- [Dualboot Setup](guide/Vietnam/dualboot-selection.md)
 
-- [Project Status](guide/status-selection.md)
+- [Project Status](guide/Vietnam/status-selection.md)
 
-- [Troubleshooting](guide/troubleshooting-selection.md)
+- [Troubleshooting](guide/Vietnam/troubleshooting-selection.md)
 
-- [Driver updating instructions](guide/driver-updating-selection.md)
+- [Driver updating instructions](guide/Vietnam/driver-updating-selection.md)
 
 ## Contributors
 
