@@ -181,4 +181,4 @@ Hoặc vào menu Wipe(twrp) và nhấn Format Data, sau đó nhấn `yes`.
 Chỉ cần khởi động lại điện thoại và xem Android có còn hoạt động không, không thì bạn toan rồi đấy :))
 
 
-## [Bước tiếp theo: Cài đặt Windows](/guide/Vietnam/2-install-vi.md)
+## [Bước tiếp theo: Cài đặt Windows](/guide/Vietnam/install.md)
