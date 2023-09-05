@@ -1,70 +1,76 @@
-<img align="right" src="https://github.com/wormstest/src_vayu_windows/blob/main/2Poco X3 Pro Windows.png" width="350" alt="Windows 11 Running On A Poco X3 Pro">
+<img align="right" src="https://github.com/PhucHauDeveloper/Port-Windows-11-Xiaomi-Mi-Mix-2s/blob/b71fde07677d753897aa44eaec1914f54c57cede/guide/png/Xiaomi%20Mi%20Mix%202s%20Windows.png?raw=true" width="350" alt="Windows 11 Running On A Xiaomi Mi Mix 2s">
+
+# Chạy Windows trên điện thoại Xiaomi Mi Mix 2s
+
+## Cài đặt
+
+## Cài đặt Windows
+> Cần não
+
+### Yêu cầu bắt buộc
+
+- Đã có trong file, bạn không cần bất cứ thứ gì nữa cả
 
 
-# Running Windows on the POCO X3 Pro
 
-## Installation
 
-## Installing Windows
-> You will need to have MTP disabled in Mount
-
-### Prerequisites
-
-- [Windows on ARM image (Windows 11 is recommended)](https://uupdump.net/)
-- [UEFI image](https://github.com/degdag/edk2-msm/releases/latest)
-- [DriverUpdater](https://github.com/WOA-Project/DriverUpdater/releases/latest)
-- [Drivers](https://github.com/degdag/Vayu-Drivers/releases/latest)
-
-#### Execute the msc script
-
-```cmd
-adb shell msc.sh
+#### Khởi động lại vào TWRP
+#Khởi động adb
+```
+adb shell
+```
+#Chép parted vào điện thoại
+```
+cp /sdcard/parted /sbin/ && chmod 755 /sbin/parted
+umount /data && umount /sdcard
+```
+#Chạy parted
+```
+parted /dev/block/sda
 ```
 
+### Gán tên phân vùng
   
 
-### Assign letters to disks
-  
+#### Khởi động Windows disk manager
 
-#### Start the Windows disk manager
-
-> Once the X3 Pro is detected as a disk
+> Chạy lệnh sau để vào diskpart
 
 ```cmd
 diskpart
 ```
 
 
-### Assign `X` to Windows volume
+### Gán `X` cho phân vùng Windows
 
-#### Select the Windows volume of the phone
-> Use `list volume` to find it, it's the one named "WINVAYU"
+#### Chọn phân vùng của Windows
+> Sử dụng `list volume` để tìm, nó tên là "WIN"
 
 ```diskpart
 select volume <number>
 ```
 
-#### Assign the letter X
+#### Gán tên phân vùng win thành 'X'
 ```diskpart
 assign letter=x
 ```
 
-### Assign `Y` to esp volume
+### Gán tên phân vùng esp thành `Y`
 
 #### Select the ESP volume of the phone
-> Use `list volume` to find it, it's the one named "ESPVAYU"
+> Sử dụng `list volume` để tìm, nó tên là "ESP"
 
 ```diskpart
 select volume <number>
 ```
 
-#### Assign the letter Y
+#### Gán tên thành Y
 
 ```diskpart
 assign letter=y
 ```
 
-#### Exit diskpart
+#### Thoát diskpart
 ```diskpart
 exit
 ```
@@ -72,82 +78,44 @@ exit
   
   
 
-### Install
+### Cài đặt
 
-> Replace `<path/to/install.wim>` with the actual install.wim path,
+#### Cài đặt Windows arm
+Đầu tiên mở DISM++, nhấn Ctrl + N, chọn Browse thứ nhất chọn tới file Windows Arm( có đuôi .ESD, .WIN, .ISO, .SWM) của bạn
+Browse thứ 2 hãy chọn ổ X(ổ Windows của điện thoại bạn), chọn Format, chọn Target (nếu thích), nhân ok để bắt đầu, đừng đụng vào cáp, hãy pha tách cafe và chờ nó vì nó rất chậm
 
-> `install.wim` is located in sources folder inside your ISO
-> You can get it either by mounting or extracting it
+### Cài đặt Drivers
+Nên cài driver bằng DIMP++, sau bước trên, chọn X:\ trong DIMP, chọn Open session, chọn Driver, chọn Add, mở tới folder driver, nó sẽ tự cài cho bạn.
 
-```cmd
-dism /apply-image /ImageFile:<path/to/install.wim> /index:1 /ApplyDir:X:\
-```
-
-### Check what type of panel you have
-
-> Open cmd
-
-```cmd
-adb shell cat /proc/cmdline
-```
-> Look for `msm_drm.dsi_display0` almost at the bottom
-
-> If your device is `Tianma` `msm_drm.dsi_display0` will be `dsi_j20s_36_02_0a_video_display`
-
-> If your device is `Huaxing` `msm_drm.dsi_display0` will be `dsi_j20s_42_02_0b_video_display`, if it is, go to the drivers folder `Vayu-Drivers/components/QC8150/Device/DEVICE.SOC_QC8150.VAYU/Drivers/Touch/` and delete `j20s_novatek_ts_fw01.bin`, finally rename `j20s_novatek_ts_fw02.bin` to `j20s_novatek_ts_fw01.bin`
-
-### Install Drivers
-
-> Replace `<vayudriversfolder>` with the location of the drivers folder
-
-```cmd
-driverupdater.exe -d <vayudriversfolder>\definitions\Desktop\ARM64\Internal\vayu.txt -r <vayudriversfolder> -p X:
-```
-
-  
-
-### Create Windows bootloader files for the EFI
+### Tạo tệp Windows bootloader vào EFI
 
 ```cmd
 bcdboot X:\Windows /s Y: /f UEFI
 ```
 
-  
-  
+## Che phép driver chưa kí
 
-## Allow unsigned drivers
-
-> If you don't do this you'll get a BSOD
+> Nếu bạn bỏ qua, bạn sẽ bị BSOD và bắt buộc phải thực hiện cài lại windows
 
 ```cmd
 bcdedit /store Y:\EFI\Microsoft\BOOT\BCD /set {default} testsigning on
 ```
 
-## Boot into Windows
+## Boot vào Windows
 
-### Move the `<uefi.img>` file to the device
+### Copy `<uefi.img>` vào điện thoại của bạn
 
 ```cmd
 adb push <uefi.img> /sdcard
 ```
 
-#### if you have a microSD card use this
+### Thêm bản sao lưu cho Android boot image của bạn
+> Sử dụng TWRP, sao lưu boot
 
-```cmd
-adb push <uefi.img> /external_sd
-```
+### Cài uefi image bằng TWRP
+Chọn tới file `uefi.img` và flash nó vào boot
 
+## Khởi động về Android
+> Sử dụng boot Android đã backup
 
-### Make a backup of your existing boot image
-> You need to do it just once
-
-> Put it to the microSD card if possible
-
-
-### Flash the uefi image from TWRP
-Navigate to the `uefi.img` file and flash it into boot
-
-## Boot back into Android
-> Use your backup boot image from TWRP
-
-## Finished!
+## Hoàn thành!
