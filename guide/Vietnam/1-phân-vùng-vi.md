@@ -142,7 +142,7 @@ mkpart userdata ext4 220GB 251GB
   </summary>
 </details>
 
-#### Tạo phân vùng khởi động ESP để EFI có thể phát hiện ra nó
+#### Kích hoạt phân vùng khởi động ESP để EFI có thể phát hiện ra nó
 ```sh
 set 21 esp on
 ```
@@ -160,6 +160,7 @@ adb shell
 ```
 
 #### Định dạng phân vùng
+Lưu ý NHẤT ĐỊNH PHẢI ĐẶT TÊN PHẦN VÙNG NHƯ TÔI HOẶC MÁY BẠN SẼ SOFT BRICK!!!
 -  Định dạng phân vùng
 ```sh
 mkfs.fat -F32 -s1 /dev/block/by-name/esp
@@ -180,4 +181,4 @@ Hoặc vào menu Wipe(twrp) và nhấn Format Data, sau đó nhấn `yes`.
 Chỉ cần khởi động lại điện thoại và xem Android có còn hoạt động không, không thì bạn toan rồi đấy :))
 
 
-## [Bước tiếp theo: Cài đặt Windows](/guide/English/2-install-en.md)
+## [Bước tiếp theo: Cài đặt Windows](/guide/Vietnam/2-install-vi.md)
