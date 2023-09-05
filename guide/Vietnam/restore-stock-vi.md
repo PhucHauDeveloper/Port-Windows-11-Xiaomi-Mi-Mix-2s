@@ -1,31 +1,75 @@
-<img align="right" src="https://github.com/wormstest/src_vayu_windows/blob/main/2Poco X3 Pro Windows.png" width="350" alt="Windows 11 Running On A Poco X3 Pro">
+<img align="right" src="https://github.com/PhucHauDeveloper/Port-Windows-11-Xiaomi-Mi-Mix-2s/blob/b71fde07677d753897aa44eaec1914f54c57cede/guide/png/Xiaomi%20Mi%20Mix%202s%20Windows.png?raw=true" width="350" alt="Windows 11 Running On A Xiaomi Mi Mix 2s">
 
 
-# Running Windows on the POCO X3 Pro
+# Chạy Windows trên điện thoại Xiaomi Mi Mix 2s
 
-## Uninstallation
+## Gỡ cài đặt
 
 ### Why is this needed?
 
-If you have followed the old guide your partition order will be too different and may have some consequences if you dont restore your stock partition table.
+Nếu bạn đã làm theo hướng dẫn cũ, thứ tự phân vùng của bạn sẽ quá khác và có thể gây ra một số hậu quả nếu bạn không khôi phục bảng phân vùng gốc của mình.
 
-If you want to uninstall windows this is used instead of deleting partitions manually to avoid human error + writing a whole dedicated guide to just uninstalling.
+Nếu bạn muốn gỡ cài đặt windows, cách này được sử dụng thay vì xóa phân vùng theo cách thủ công để tránh lỗi của con người + viết toàn bộ hướng dẫn dành riêng cho việc gỡ cài đặt.
 
-If you want to relock your bootloader you'll need your partition table to be stock.
+Nếu bạn muốn khóa lại bộ nạp khởi động, bạn sẽ cần có bảng phân vùng trong kho.
 
-### Prerequisites
+### Bắt buộc có
 
 - [ADB & Fastboot](https://developer.android.com/studio/releases/platform-tools)
-- [gpt_both0.bin](../../../../releases/tag/binaries)
 
-### Restore GPT
-> Replace ```<gpt_both0.bin>``` with the path to the gpt_both0.bin file.
-
-```cmd
-fastboot flash partition:0 <gpt_both0.bin>
+### Hãy làm tới bước thay đổi kích thước cây phân vùng
+Thay vì theo cây tôi ghi, hãy làm theo cái này
+#### Xóa phân vùng `userdata` và windows, esp
+> Bạn có thể đảm bảo rằng 21 22 23 là số phân vùng userdata và windows, esp bằng cách chạy
+>  `print all`
+```sh
+rm 21
+rm 22
+rm 23
 ```
 
-### Erase userdata to avoid bootloop and restore FS size
+#### Tạo lại phân vùng
+
+<details>
+<summary><b><strong>Dành cho máy 64GB</strong></b></summary>
+
+- Tạo phân vùng dữ liệu của Android
+```sh
+mkpart userdata ext4 6559MB 59.1GB
+```
+
+  </summary>
+</details>
+
+
+<details>
+<summary><b><strong>Dành cho máy 128GB</strong></b></summary>
+
+- Tạo phân vùng dữ liệu của Android
+```sh
+mkpart userdata ext4 6559MB 123GB
+```
+
+  </summary>
+</details>
+
+
+<details>
+<summary><b><strong>Dành cho máy 256GB</strong></b></summary>
+
+- Tạo phân vùng dữ liệu của Android
+```sh
+mkpart userdata ext4 6559MB 251GB
+```
+
+  </summary>
+</details>
+
+### Dọn sạch phân vùng userdata
 ```cmd
 fastboot -w
 ```
+
+Sau khi làm, bạn nên flash lại Miui rom bằng Xiaomi Flash để trách các lỗi không cần thiết có thể xảy ra
+
+
