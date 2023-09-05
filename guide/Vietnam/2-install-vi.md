@@ -19,12 +19,12 @@
 ```
 adb shell
 ```
-#Chép parted vào điện thoại
+# Chép parted vào điện thoại
 ```
 cp /sdcard/parted /sbin/ && chmod 755 /sbin/parted
 umount /data && umount /sdcard
 ```
-#Chạy parted
+# Chạy parted
 ```
 parted /dev/block/sda
 ```
